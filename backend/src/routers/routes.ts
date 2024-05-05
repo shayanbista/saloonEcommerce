@@ -18,6 +18,8 @@ import {
   addProductImages,
   removeOrder,
   getBooking,
+  deleteBooking,
+  approveBooking,
 } from "../controller";
 import { userRole } from "../auth/jwt-verification/token_verification";
 import { Context } from "vm";
@@ -53,6 +55,8 @@ export const registrationRoute = (router: Router) => {
 export const bookingRoute = (router: Router) => {
   router.post("/booking", storeBooking);
   router.get("/booking", getBooking);
+  router.delete("/booking/:name", deleteBooking);
+  router.put("/booking/:name", approveBooking);
 };
 export const adminDashboard = (router: Router) => {
   router.get("/adminDash", adminDash);

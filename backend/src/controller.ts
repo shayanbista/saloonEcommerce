@@ -1,7 +1,7 @@
-import { string } from "yup";
+import { string, tuple } from "yup";
 import Jwt from "jsonwebtoken";
 import axios from "axios";
-import { In, IsNull } from "typeorm";
+import { Any, In, IsNull } from "typeorm";
 require("dotenv").config();
 import fs, { exists } from "fs";
 
@@ -136,14 +136,37 @@ export const getBooking = async (ctx: Context) => {
       status: IsNull(),
     },
   });
-  // if (allBooking) {
-  //   ctx.status = 200;
-  //   ctx.body = "hello";
-  // }
   ctx.status = 200;
   ctx.body = allBooking;
-  // ctx.status = 500;
-  // return;
+};
+
+export const approveBooking = async (ctx: Context) => {
+  const bookingName: any = ctx.params.name;
+  console.log(bookingName);
+  const bookingname = bookingName;
+  const bookingRepo = AppDataSource.getRepository(Booking);
+
+  try {
+    const bookingName = await bookingRepo.findOne({
+      where: {
+        name: bookingname,
+      },
+    });
+    if (bookingName) {
+      const id = bookingName.id;
+      await bookingRepo.update({ id }, { status: true });
+      ctx.status = 200;
+    } else {
+      ctx.status = 400;
+      ctx.body = "not found";
+    }
+
+    // await bookingRepo.softDelete(bookingName?.id);
+    // ctx.body = { message: "Booking deleted successfully" };
+  } catch (error) {
+    console.error("Error while deleting booking:", error);
+    throw error;
+  }
 };
 
 export const adminDash = async (ctx: Context) => {
@@ -151,6 +174,36 @@ export const adminDash = async (ctx: Context) => {
     ctx.body = "this is not admin";
   } else {
     ctx.body = "hello admin";
+  }
+};
+
+export const deleteBooking = async (ctx: Context) => {
+  const bookingName: any = ctx.params.name;
+  console.log(bookingName);
+  const bookingname = bookingName;
+
+  const bookingRepo = AppDataSource.getRepository(Booking);
+
+  try {
+    const bookingName = await bookingRepo.findOne({
+      where: {
+        name: bookingname,
+      },
+    });
+    if (bookingName) {
+      const id = bookingName.id;
+      await bookingRepo.softDelete(id);
+      ctx.status = 200;
+    } else {
+      ctx.status = 400;
+      ctx.body = "not found";
+    }
+
+    // await bookingRepo.softDelete(bookingName?.id);
+    // ctx.body = { message: "Booking deleted successfully" };
+  } catch (error) {
+    console.error("Error while deleting booking:", error);
+    throw error;
   }
 };
 
