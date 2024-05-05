@@ -17,6 +17,7 @@ import {
   removeProductImage,
   addProductImages,
   removeOrder,
+  getBooking,
 } from "../controller";
 import { userRole } from "../auth/jwt-verification/token_verification";
 import { Context } from "vm";
@@ -51,6 +52,7 @@ export const registrationRoute = (router: Router) => {
 
 export const bookingRoute = (router: Router) => {
   router.post("/booking", storeBooking);
+  router.get("/booking", getBooking);
 };
 export const adminDashboard = (router: Router) => {
   router.get("/adminDash", adminDash);

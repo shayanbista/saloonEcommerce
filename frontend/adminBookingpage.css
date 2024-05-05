@@ -579,3 +579,12 @@ h2{
 .booking :hover{
     cursor: pointer;
 }
+
+#viewbooking{
+
+    position: relative;
+    left: 350px;
+    background-color: rgba(56, 29, 54, 0.359);
+    height: 50px;
+    color: white;
+}

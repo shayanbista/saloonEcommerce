@@ -1,7 +1,7 @@
 import { string } from "yup";
 import Jwt from "jsonwebtoken";
 import axios from "axios";
-import { In } from "typeorm";
+import { In, IsNull } from "typeorm";
 require("dotenv").config();
 import fs, { exists } from "fs";
 
@@ -127,6 +127,23 @@ export const storeBooking = async (ctx: Context) => {
     ctx.status = 400;
     return;
   }
+};
+
+export const getBooking = async (ctx: Context) => {
+  const bookingRepo = AppDataSource.getRepository(Booking);
+  const allBooking = await bookingRepo.find({
+    where: {
+      status: IsNull(),
+    },
+  });
+  // if (allBooking) {
+  //   ctx.status = 200;
+  //   ctx.body = "hello";
+  // }
+  ctx.status = 200;
+  ctx.body = allBooking;
+  // ctx.status = 500;
+  // return;
 };
 
 export const adminDash = async (ctx: Context) => {

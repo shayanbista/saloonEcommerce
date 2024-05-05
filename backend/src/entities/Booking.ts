@@ -27,6 +27,9 @@ export class Booking extends BaseEntity {
   @Column({ nullable: true })
   address: string;
 
+  @Column({ nullable: true })
+  status: boolean;
+
   @DeleteDateColumn({ name: "deletedAt", nullable: true })
   deletedAt: Date;
 
