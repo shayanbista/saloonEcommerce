@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logo.jpg" alt="logo">
+            <h2>Welcome</h2>
+        </div>
+        <ul class="links">
+            <h4>Main Menu</h4>
+            <li>
+                <span class="material-symbols-outlined">show_chart</span>
+                <a href="payment.html">book for saloon service</a>
+            </li>  
+
+            <li>
+                <span class="material-symbols-outlined">show_chart</span>
+                <a href="services.html">services we provide</a>
+            </li>
+
+            <li class="logout-link">
+                <span class="material-symbols-outlined">logout</span>
+                <a href="homepage1.html">Logout</a>
+            </li>
+        </ul>
+    </aside>
+    <script>
+         let storedData = sessionStorage.getItem('userId');
+            if (storedData) {
+                console.log('Data retrieved from session storage:', storedData);
+            } else {
+                console.log('No data found in session storage.');
+            }
+    </script>
+</body>
+
+</html>
