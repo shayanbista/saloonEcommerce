@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adminBookingpage.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>booking</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="adminDash.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Dahsboard</span>
+                    </a></li>
+                <li><a href="content.html">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Content</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Analytics</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-thumbs-up"></i>
+                        <span class="link-name">Like</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">Comment</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-share"></i>
+                        <span class="link-name">Share</span>
+                    </a></li>
+            </ul>
+            <ul class="logout-mode">
+                <li>
+                    <a href="homepage1.html">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Dark Mode</span>
+                    </a>
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <section id="bookingsection" class="booking">
+                <!-- Bookings Section -->
+                <div id="bookingsContent" class="content-section">
+                    <h2> Total Aviliable Bookings</h2>
+                    <table border="2px">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th colspan="2">Action</th>
+                                <th colspan="2">Approved?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>123-456-7890</td>
+                                <td>123 Main St, City, Country</td>
+                                <td>john@example.com</td>
+                                <td><button class="approve-btn" onclick="approveRow(this)">Approve</button></td>
+                                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+                                <td>NotApproved</td>
+                        
+                            </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>123-456-7890</td>
+                                <td>123 Main St, City, Country</td>
+                                <td>john@example.com</td>
+                                <td><button class="approve-btn" onclick="approveRow(this)">Approve</button></td>
+                                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+                                <td>NotApproved</td>
+                       
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <script>
+        function deleteRow(button){
+              let listItem = button.closest("tr");
+              listItem.remove();
+              window.alert("deleted");
+        }
+
+        function approveRow(button) {
+
+            // console.log(button);
+            let row = button.closest("tr");
+            row.classList.add("approved"); 
+            window.alert("Approved");
+            let lastTd = row.querySelector("td:last-child");
+            lastTd.textContent = "Approved";
+            }
+
+       
+        const body = document.querySelector("body"),
+            modeToggle = body.querySelector(".mode-toggle");
+        sidebar = body.querySelector("nav");
+        sidebarToggle = body.querySelector(".sidebar-toggle");
+
+        // Set initial mode to "light" if not already set
+        let getMode = localStorage.getItem("mode");
+        if (!getMode) {
+            localStorage.setItem("mode", "light");
+        }
+
+        // Apply dark mode if previously set
+        getMode = localStorage.getItem("mode");
+        if (getMode === "dark") {
+            body.classList.add("dark");
+        }
+
+        modeToggle.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("mode", "dark");
+            } else {
+                localStorage.setItem("mode", "light");
+            }
+        });
+    </script>
+</body>
+
+</html>
