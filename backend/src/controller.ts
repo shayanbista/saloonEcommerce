@@ -1,6 +1,5 @@
 import { string, tuple } from "yup";
 import Jwt from "jsonwebtoken";
-import axios from "axios";
 import { Any, In, IsNull } from "typeorm";
 require("dotenv").config();
 import fs, { exists } from "fs";
@@ -64,6 +63,20 @@ export const registration = async (ctx: Context) => {
     }
   } catch (err) {
     ctx.body = 500;
+    return;
+  }
+};
+
+export const adminLogin = async (ctx: Context) => {
+  const { email, password }: any = ctx.request.body;
+  console.log(email);
+  console.log(password);
+
+  if (email != "shisiradmin@gmail.com") {
+    ctx.status = 403;
+    ctx.body = "this is not admin";
+  } else {
+    ctx.status = 200;
     return;
   }
 };

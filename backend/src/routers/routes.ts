@@ -20,6 +20,7 @@ import {
   getBooking,
   deleteBooking,
   approveBooking,
+  adminLogin,
 } from "../controller";
 import { userRole } from "../auth/jwt-verification/token_verification";
 import { Context } from "vm";
@@ -36,6 +37,8 @@ export const loginRoute = (router: Router) => {
       console.log(`user doesnot exist`);
     }
   });
+
+  router.post("/adminlogin", adminLogin);
 
   router.get("/gateway", async (ctx) => {
     await send(ctx, "index.html", {
